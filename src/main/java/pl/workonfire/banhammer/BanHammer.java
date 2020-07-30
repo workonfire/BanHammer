@@ -1,7 +1,6 @@
 package pl.workonfire.banhammer;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,8 +9,10 @@ import pl.workonfire.banhammer.listeners.EntityDamage;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("ConstantConditions")
 public final class BanHammer extends JavaPlugin {
     private BanHammer instance;
+    public static final String PREFIX = "§f§k[§r§4§lBanHammer§f§k]§r ";
 
     @Override
     public void onEnable() {
@@ -33,7 +34,6 @@ public final class BanHammer extends JavaPlugin {
         itemMeta.setDisplayName("§4§lBan Hammer");
         itemMeta.setUnbreakable(true);
         item.setItemMeta(itemMeta);
-        item.addUnsafeEnchantment(Enchantment.KNOCKBACK, 10);
         return item;
     }
 }

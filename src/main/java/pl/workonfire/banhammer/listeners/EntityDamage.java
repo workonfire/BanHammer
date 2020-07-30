@@ -11,6 +11,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import pl.workonfire.banhammer.BanHammer;
 
+import static pl.workonfire.banhammer.BanHammer.PREFIX;
+
 public class EntityDamage implements Listener {
 
     @EventHandler
@@ -20,18 +22,21 @@ public class EntityDamage implements Listener {
             if (damager instanceof Player) {
                 Player banner = (Player) damager;
                 if (banner.getInventory().getItemInMainHand().isSimilar(BanHammer.getBanHammer())
-                        && event.getEntityType() == EntityType.PLAYER) {
+                        && event.getEntityType() == EntityType.PLAYER
+                        && banner.hasPermission("banhammer.use")) {
 
                     Player victim = (Player) event.getEntity();
-                    victim.getWorld().strikeLightning(victim.getLocation());
 
-                    Bukkit.broadcast(victim.getDisplayName() + " §cwas banned from the server using a §4§lBAN HAMMER§c!",
-                            "banhammer.notify");
-
-                    BanList banList = Bukkit.getBanList(BanList.Type.NAME);
-                    String banReason = "§cYou were §4§lBANNED §cusing a §4§lBAN HAMMER§c! By: §r" + banner.getDisplayName();
-                    banList.addBan(victim.getName(), banReason, null, banner.getName());
-                    victim.kickPlayer(banReason);
+                    if (!victim.hasPermission("banhammer.exempt")) {
+                        victim.getWorld().strikeLightning(victim.getLocation());
+                        Bukkit.broadcast(victim.getDisplayName() + " §cwas banned from the server using a §4§lBAN HAMMER§c!",
+                                "banhammer.notify");
+                        BanList banList = Bukkit.getBanList(BanList.Type.NAME);
+                        String banReason = "§cYou were §4§lBANNED §cusing a §4§lBAN HAMMER§c! By: §r" + banner.getDisplayName();
+                        banList.addBan(victim.getName(), banReason, null, banner.getName());
+                        victim.kickPlayer(banReason);
+                    }
+                    else banner.sendMessage(PREFIX + "§cYou cannot ban a player that has the §7§obanhammer.exempt §cpermission.");
                 }
             }
         }

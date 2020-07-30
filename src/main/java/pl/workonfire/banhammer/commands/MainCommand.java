@@ -6,8 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.workonfire.banhammer.BanHammer;
 
+import static pl.workonfire.banhammer.BanHammer.PREFIX;
+
 public class MainCommand implements CommandExecutor {
-    private static final String PREFIX = "§7[§4§lBanHammer§7] ";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
