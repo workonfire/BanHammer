@@ -1,0 +1,8 @@
+name: BanHammer
+version: ${project.version}
+main: pl.workonfire.banhammer.BanHammer
+api-version: 1.13
+authors: [workonfire]
+commands:
+  banhammer:
+    aliases: [bh]
