@@ -14,7 +14,6 @@ import pl.workonfire.banhammer.ConfigManager;
 
 import static pl.workonfire.banhammer.BanHammer.PREFIX;
 
-@SuppressWarnings("ConstantConditions")
 public class EntityDamage implements Listener {
 
     @EventHandler
@@ -23,7 +22,7 @@ public class EntityDamage implements Listener {
             Entity damager = event.getDamager();
             if (damager instanceof Player) {
                 Player banner = (Player) damager;
-                if (banner.getInventory().getItemInMainHand().isSimilar(BanHammer.getBanHammer())
+                if (banner.getInventory().getItemInMainHand().isSimilar(BanHammer.getBanTool())
                         && event.getEntityType() == EntityType.PLAYER
                         && banner.hasPermission("banhammer.use")) {
 

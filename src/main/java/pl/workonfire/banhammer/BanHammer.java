@@ -28,7 +28,7 @@ public final class BanHammer extends JavaPlugin {
         return instance;
     }
 
-    public static ItemStack getBanHammer() {
+    public static ItemStack getBanTool() {
         Material material = Material.getMaterial(ConfigManager.getValue("item.material"));
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();

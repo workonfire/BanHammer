@@ -17,7 +17,7 @@ public class MainCommand implements CommandExecutor {
             Player player = (Player) sender;
             String permission = "banhammer.get";
             if (player.hasPermission(permission)) {
-                player.getInventory().addItem(BanHammer.getBanHammer());
+                player.getInventory().addItem(BanHammer.getBanTool());
                 player.sendMessage(PREFIX + ConfigManager.getValue("messages.get-message"));
             }
             else player.sendMessage(PREFIX + ConfigManager.getValue("messages.missing-permission")
