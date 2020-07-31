@@ -1,0 +1,15 @@
+# Wzium.
+
+item:
+  material: GOLDEN_AXE
+  name: "&4&lBan Hammer"
+  lore:
+    - "&f&oBans every touched player."
+
+messages:
+  ban-message: "{PLAYER} &cwas banned from the server using a &4&lBAN HAMMER&c!"
+  ban-reason: "&cYou were &4&lBANNED &cusing a &4&lBAN HAMMER&c! By: &r{PLAYER}"
+  get-message: "&aYou were given a ban hammer. Use it with caution!"
+  missing-permission: "&cYou need the following permission in order to execute this command: &7&o{PERMISSION}"
+  cannot-ban: "&cYou cannot ban a player that has the &7&obanhammer.exempt &cpermission."
+  cannot-execute-from-console: "&cYou have to be a player in order to execute this command."

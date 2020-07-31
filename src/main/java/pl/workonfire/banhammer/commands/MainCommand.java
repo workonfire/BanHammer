@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import pl.workonfire.banhammer.BanHammer;
+import pl.workonfire.banhammer.ConfigManager;
 
 import static pl.workonfire.banhammer.BanHammer.PREFIX;
 
@@ -17,11 +18,12 @@ public class MainCommand implements CommandExecutor {
             String permission = "banhammer.get";
             if (player.hasPermission(permission)) {
                 player.getInventory().addItem(BanHammer.getBanHammer());
-                player.sendMessage(PREFIX + "§aYou were given a ban hammer. Use it with caution!");
+                player.sendMessage(PREFIX + ConfigManager.getValue("messages.get-message"));
             }
-            else player.sendMessage(PREFIX + "§cYou need the following permission in order to execute this command: §7§o" + permission);
+            else player.sendMessage(PREFIX + ConfigManager.getValue("messages.missing-permission")
+                    .replaceAll("\\{PERMISSION}", permission));
         }
-        else sender.sendMessage(PREFIX + "§cYou have to be a player in order to execute this command.");
+        else sender.sendMessage(PREFIX + ConfigManager.getValue("messages.cannot-execute-from-console"));
         return true;
     }
 }

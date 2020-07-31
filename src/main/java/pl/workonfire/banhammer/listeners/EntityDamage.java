@@ -10,9 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import pl.workonfire.banhammer.BanHammer;
+import pl.workonfire.banhammer.ConfigManager;
 
 import static pl.workonfire.banhammer.BanHammer.PREFIX;
 
+@SuppressWarnings("ConstantConditions")
 public class EntityDamage implements Listener {
 
     @EventHandler
@@ -29,14 +31,16 @@ public class EntityDamage implements Listener {
 
                     if (!victim.hasPermission("banhammer.exempt")) {
                         victim.getWorld().strikeLightning(victim.getLocation());
-                        Bukkit.broadcast(victim.getDisplayName() + " §cwas banned from the server using a §4§lBAN HAMMER§c!",
-                                "banhammer.notify");
+                        String banMessage = ConfigManager.getValue("messages.ban-message")
+                                .replaceAll("\\{PLAYER}", victim.getDisplayName());
+                        Bukkit.broadcast(banMessage, "banhammer.notify");
                         BanList banList = Bukkit.getBanList(BanList.Type.NAME);
-                        String banReason = "§cYou were §4§lBANNED §cusing a §4§lBAN HAMMER§c! By: §r" + banner.getDisplayName();
+                        String banReason = ConfigManager.getValue("messages.ban-reason")
+                                .replaceAll("\\{PLAYER}", banner.getDisplayName());
                         banList.addBan(victim.getName(), banReason, null, banner.getName());
                         victim.kickPlayer(banReason);
                     }
-                    else banner.sendMessage(PREFIX + "§cYou cannot ban a player that has the §7§obanhammer.exempt §cpermission.");
+                    else banner.sendMessage(PREFIX + ConfigManager.getValue("messages.cannot-ban"));
                 }
             }
         }
